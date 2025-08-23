@@ -1,6 +1,6 @@
 /**
- * UTF-8文字列を16進数文字列に変換する関数（Buffer非依存）
- * @param str 変換したいUTF-8文字列
+ * UTF8文字列を16進数文字列に変換する関数（Buffer非依存）
+ * @param str 変換したいUTF8文字列
  * @returns 16進数文字列
  */
 export function utf8ToHex(str: string): string {
