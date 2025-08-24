@@ -27,35 +27,36 @@ npm install alice-cookie
 
 ### 引数の省略可・デフォルト値
 
-| プロパティ           | 型                | 省略可 | デフォルト値   | 説明                         |
-|----------------------|-------------------|--------|----------------|------------------------------|
-| serializedTransaction| Uint8Array        | ×      | -              | 署名対象トランザクション      |
-| serializedTransactions| Uint8Array[]     | ×      | -              | 一括署名用トランザクション配列|
-| stringUtf8           | string            | ×      | -              | 署名対象UTF8文字列           |
-| binaryData           | Uint8Array        | ×      | -              | 署名対象バイナリデータ        |
-| callbackUrl          | string            | ○      | -              | 署名後のコールバックURL       |
-| method               | 'get'\|'post'\|'announce' | ○ | 'get'         | コールバック方式             |
-| publicKey            | string            | ○      | -              | 署名者の公開鍵（任意指定）    |
-| node                 | string            | ○      | -              | 利用ノードURL                 |
-| hashLockDuration     | number            | ○      | 480            | アグリゲートボンデッド用      |
+| プロパティ             | 型                        | 省略可 | デフォルト値 | 説明                                         |
+| ---------------------- | ------------------------- | ------ | ------------ | -------------------------------------------- |
+| serializedTransaction  | Uint8Array                | ×      | -            | 署名対象トランザクション                     |
+| serializedTransactions | Uint8Array[]              | ×      | -            | 一括署名用トランザクション配列               |
+| stringUtf8             | string                    | ×      | -            | 署名対象UTF8文字列                           |
+| binaryData             | Uint8Array                | ×      | -            | 署名対象バイナリデータ                       |
+| callbackUrl            | string                    | ○      | -            | 署名後のコールバックURL                      |
+| method                 | 'get'\|'post'\|'announce' | ○      | 'get'        | コールバック方式                             |
+| publicKey              | string                    | ○      | -            | 署名者の公開鍵                               |
+| node                   | string                    | ○      | -            | アナウンスノードURL                          |
+| hashLockDuration       | number                    | ○      | 480          | ハッシュロック期限(アグリゲートボンデッド用) |
 
 ※各関数で利用しないプロパティは無視されます。
 
 ### 主なメソッド一覧
 
-| メソッド名                        | 用途                     | 主な引数型                       | 返り値型         |
-|-----------------------------------|--------------------------|----------------------------------|------------------|
-| aliceRequestSignTransaction       | トランザクション署名     | AliceSignTransactionOptions      | Promise<void>    |
-| aliceRequestSignAggregateBondedTx | アグリゲートボンデッド署名| AliceSignAggregateBondedTxOptions| Promise<void>    |
-| aliceRequestSignUtf8              | UTF8文字列署名           | AliceSignUtf8Options             | Promise<void>    |
-| aliceRequestSignBinaryHex         | バイナリデータ署名       | AliceSignBinaryHexOptions        | Promise<void>    |
-| aliceRequestSignBatches           | 複数トランザクション署名 | AliceSignBatchesOptions          | Promise<void>    |
-| aliceRequestPublicKey             | 公開鍵取得               | AlicePublicKeyOptions            | Promise<void>    |
-| aliceGetResponseGet               | レスポンス取得           | なし                             | 各種レスポンス型 |
+| メソッド名                        | 用途                       | 主な引数型                        | 返り値型         |
+| --------------------------------- | -------------------------- | --------------------------------- | ---------------- |
+| aliceRequestSignTransaction       | トランザクション署名       | AliceSignTransactionOptions       | Promise<void>    |
+| aliceRequestSignAggregateBondedTx | アグリゲートボンデッド署名 | AliceSignAggregateBondedTxOptions | Promise<void>    |
+| aliceRequestSignUtf8              | UTF8文字列署名             | AliceSignUtf8Options              | Promise<void>    |
+| aliceRequestSignBinaryHex         | バイナリデータ署名         | AliceSignBinaryHexOptions         | Promise<void>    |
+| aliceRequestSignBatches           | 複数トランザクション署名   | AliceSignBatchesOptions           | Promise<void>    |
+| aliceRequestPublicKey             | 公開鍵取得                 | AlicePublicKeyOptions             | Promise<void>    |
+| aliceGetResponseGet               | レスポンス取得             | なし                              | 各種レスポンス型 |
 
 ---
 
 ### コールバックURLについて
+
 - コールバックURLはhttpsを推奨します。
 - スマートフォンのブラウザでaLiceアプリから遷移できるURLを指定してください。
 
@@ -64,30 +65,34 @@ npm install alice-cookie
 ### 1. トランザクション署名リクエスト
 
 ```ts
-import { aliceRequestSignTransaction } from 'alice-cookie';
+import { aliceRequestSignTransaction } from 'alice-cookie'
 
 aliceRequestSignTransaction({
-  serializedTransaction: new Uint8Array([/* Symbol SDK等で生成したバイト列 */]),
+  serializedTransaction: new Uint8Array([
+    /* Symbol SDK等で生成したバイト列 */
+  ]),
   callbackUrl: 'https://your-app/callback',
-  method: 'get', 
-  publicKey: '公開鍵文字列', // 任意
-  node: 'https://symbol-node', // 任意
-});
+  method: 'get',
+  publicKey: '公開鍵文字列',
+  node: 'https://symbol-node',
+})
 ```
 
 ### 2. アグリゲートボンデッド署名リクエスト
 
 ```ts
-import { aliceRequestSignAggregateBondedTx } from 'alice-cookie';
+import { aliceRequestSignAggregateBondedTx } from 'alice-cookie'
 
 aliceRequestSignAggregateBondedTx({
-  serializedTransaction: new Uint8Array([/* ... */]),
-  hashLockDuration: 480, // 任意
+  serializedTransaction: new Uint8Array([
+    /* ... */
+  ]),
+  hashLockDuration: 480,
   callbackUrl: 'https://your-app/callback',
   method: 'get',
   publicKey: '公開鍵文字列',
   node: 'https://symbol-node',
-});
+})
 ```
 
 ### 3. UTF8文字列署名リクエスト
@@ -107,7 +112,7 @@ aliceRequestSignUtf8({
 ### 4. バイナリデータ署名リクエスト
 
 ```ts
-import { aliceRequestSignBinaryHex } from 'alice-cookie';
+import { aliceRequestSignBinaryHex } from 'alice-cookie'
 
 aliceRequestSignBinaryHex({
   binaryData: new Uint8Array([0x01, 0x02, 0x03]),
@@ -115,21 +120,28 @@ aliceRequestSignBinaryHex({
   method: 'get',
   publicKey: '公開鍵文字列',
   node: 'https://symbol-node',
-});
+})
 ```
 
 ### 5. 複数トランザクション一括署名リクエスト
 
 ```ts
-import { aliceRequestSignBatches } from 'alice-cookie';
+import { aliceRequestSignBatches } from 'alice-cookie'
 
 aliceRequestSignBatches({
-  serializedTransactions: [new Uint8Array([/* ... */]), new Uint8Array([/* ... */])],
+  serializedTransactions: [
+    new Uint8Array([
+      /* ... */
+    ]),
+    new Uint8Array([
+      /* ... */
+    ]),
+  ],
   callbackUrl: 'https://your-app/callback',
   method: 'get',
   publicKey: '公開鍵文字列',
   node: 'https://symbol-node',
-});
+})
 ```
 
 ### 6. 公開鍵取得リクエスト
