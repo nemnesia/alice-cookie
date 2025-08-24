@@ -68,9 +68,7 @@ npm install alice-cookie
 import { aliceRequestSignTransaction } from 'alice-cookie'
 
 aliceRequestSignTransaction({
-  serializedTransaction: new Uint8Array([
-    /* Symbol SDK等で生成したバイト列 */
-  ]),
+  serializedTransaction: tx.serialize(),
   callbackUrl: 'https://your-app/callback',
   method: 'get',
   publicKey: '公開鍵文字列',
@@ -84,9 +82,7 @@ aliceRequestSignTransaction({
 import { aliceRequestSignAggregateBondedTx } from 'alice-cookie'
 
 aliceRequestSignAggregateBondedTx({
-  serializedTransaction: new Uint8Array([
-    /* ... */
-  ]),
+  serializedTransaction: tx.serialize(),
   hashLockDuration: 480,
   callbackUrl: 'https://your-app/callback',
   method: 'get',
@@ -129,14 +125,7 @@ aliceRequestSignBinaryHex({
 import { aliceRequestSignBatches } from 'alice-cookie'
 
 aliceRequestSignBatches({
-  serializedTransactions: [
-    new Uint8Array([
-      /* ... */
-    ]),
-    new Uint8Array([
-      /* ... */
-    ]),
-  ],
+  serializedTransactions: [tx1.serialize(), tx2.serialize()],
   callbackUrl: 'https://your-app/callback',
   method: 'get',
   publicKey: '公開鍵文字列',
