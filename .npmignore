@@ -1,0 +1,19 @@
+# 除外したいファイルやディレクトリを1行ずつ記載
+# 例: テストやデモ、設定ファイルなど
+
+demo/
+
+# テスト関連
+*.test.ts
+test/
+
+# 構成・設定ファイル
+.gitignore
+.editorconfig
+.prettierrc.json
+rollup.config.js
+vitest.config.ts
+tsconfig.json
+tsconfig.*.json
+yarn.lock
+.yarn/

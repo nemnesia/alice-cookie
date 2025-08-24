@@ -1186,6 +1186,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"alice-cookie@portal:..::locator=demo%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "alice-cookie@portal:..::locator=demo%40workspace%3A."
+  languageName: node
+  linkType: soft
+
 "ansi-regex@npm:^5.0.1":
   version: 5.0.1
   resolution: "ansi-regex@npm:5.0.1"
@@ -1883,6 +1889,7 @@ __metadata:
     "@types/react": "npm:^19.1.10"
     "@types/react-dom": "npm:^19.1.7"
     "@vitejs/plugin-react": "npm:^5.0.0"
+    alice-cookie: "portal:.."
     eslint: "npm:^9.33.0"
     eslint-plugin-react-hooks: "npm:^5.2.0"
     eslint-plugin-react-refresh: "npm:^0.4.20"

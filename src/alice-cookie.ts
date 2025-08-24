@@ -169,12 +169,17 @@ export function aliceGetResponseGet():
   } while (signed)
 
   // パラメータを削除
-  // window.history.replaceState({}, document.title, window.location.pathname)
+  window.history.replaceState({}, document.title, window.location.pathname)
 
   if (error) {
     return { error } as AliceErrorResponse
   } else if (signedPayload) {
-    return { signedPayload, pubkey, network, signedHashLockPayload } as AliceSignTxResponse
+    return {
+      signedPayload,
+      pubkey,
+      network,
+      ...(signedHashLockPayload !== null && { signedHashLockPayload }),
+    } as AliceSignTxResponse
   } else if (signature) {
     return { signature, originalData, network } as AliceSignUtf8Response
   } else if (signeds.length > 0) {

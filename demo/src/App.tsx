@@ -1,3 +1,17 @@
+import {
+  aliceGetResponseGet,
+  aliceRequestPublicKey,
+  aliceRequestSignAggregateBondedTx,
+  aliceRequestSignBatches,
+  aliceRequestSignBinaryHex,
+  aliceRequestSignTransaction,
+  aliceRequestSignUtf8,
+  type AliceErrorResponse,
+  type AlicePublicKeyResponse,
+  type AliceSignBatchesResponse,
+  type AliceSignTxResponse,
+  type AliceSignUtf8Response,
+} from 'alice-cookie'
 import { useEffect, useState } from 'react'
 import { PublicKey, utils } from 'symbol-sdk'
 import {
@@ -7,24 +21,8 @@ import {
   SymbolFacade,
   SymbolTransactionFactory,
 } from 'symbol-sdk/symbol'
-import {
-  aliceGetResponseGet,
-  aliceRequestPublicKey,
-  aliceRequestSignAggregateBondedTx,
-  aliceRequestSignBatches,
-  aliceRequestSignBinaryHex,
-  aliceRequestSignTransaction,
-  aliceRequestSignUtf8,
-} from './alice-cookie'
 import './App.css'
 import symbolLogo from './assets/Symbol_Logo_primary_light_BG.svg'
-import type {
-  AliceErrorResponse,
-  AlicePublicKeyResponse,
-  AliceSignBatchesResponse,
-  AliceSignTxResponse,
-  AliceSignUtf8Response,
-} from './types/alice-cookie.types'
 
 /** 空の公開鍵 */
 const EMPTY_PUBLIC_KEY = new PublicKey(new Uint8Array(32).fill(0))
